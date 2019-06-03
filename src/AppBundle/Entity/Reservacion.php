@@ -22,25 +22,39 @@ class Reservacion
     private $id;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="fecha", type="datetimetz")
+     * @ORM\Column(name="origen", type="string", length=50)
      */
-    private $fecha;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="hora", type="date")
-     */
-    private $hora;
+    private $origen;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="tipo", type="string", length=20)
+     * @ORM\Column(name="destino", type="string", length=50)
+     */
+    private $destino;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fecha", type="string", length=255)
+     */
+    private $fecha;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tipo", type="string", length=10)
      */
     private $tipo;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="estado", type="boolean")
+     */
+    private $estado;
 
 
     /**
@@ -54,9 +68,57 @@ class Reservacion
     }
 
     /**
+     * Set origen
+     *
+     * @param string $origen
+     *
+     * @return Reservacion
+     */
+    public function setOrigen($origen)
+    {
+        $this->origen = $origen;
+
+        return $this;
+    }
+
+    /**
+     * Get origen
+     *
+     * @return string
+     */
+    public function getOrigen()
+    {
+        return $this->origen;
+    }
+
+    /**
+     * Set destino
+     *
+     * @param string $destino
+     *
+     * @return Reservacion
+     */
+    public function setDestino($destino)
+    {
+        $this->destino = $destino;
+
+        return $this;
+    }
+
+    /**
+     * Get destino
+     *
+     * @return string
+     */
+    public function getDestino()
+    {
+        return $this->destino;
+    }
+
+    /**
      * Set fecha
      *
-     * @param \DateTime $fecha
+     * @param string $fecha
      *
      * @return Reservacion
      */
@@ -70,35 +132,11 @@ class Reservacion
     /**
      * Get fecha
      *
-     * @return \DateTime
+     * @return string
      */
     public function getFecha()
     {
         return $this->fecha;
-    }
-
-    /**
-     * Set hora
-     *
-     * @param \DateTime $hora
-     *
-     * @return Reservacion
-     */
-    public function setHora($hora)
-    {
-        $this->hora = $hora;
-
-        return $this;
-    }
-
-    /**
-     * Get hora
-     *
-     * @return \DateTime
-     */
-    public function getHora()
-    {
-        return $this->hora;
     }
 
     /**
@@ -124,6 +162,29 @@ class Reservacion
     {
         return $this->tipo;
     }
-}
 
+    /**
+     * Set estado
+     *
+     * @param boolean $estado
+     *
+     * @return Reservacion
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return bool
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+}
 

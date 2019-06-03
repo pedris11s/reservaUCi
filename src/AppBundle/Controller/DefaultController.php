@@ -5,17 +5,27 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Entity\Reservacion;
 
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/", name="inicio")
      */
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        ]);
+        return $this->render('inicio/index.html.twig');
+    }
+
+    /**
+     * @Route("/listar_reservaciones", name="listar_reservaciones")
+     */
+    public function listarReservacionesAction(Request $request)
+    {
+        $repo = $this->getDoctrine()->getRepository(Reservacion::class);
+        $reservaciones = $repo->findAll();
+        //var_dump($reservaciones);
+        return $this->render('reservaciones/lista_reservaciones.html.twig', array('reservaciones'=>$reservaciones));
     }
 }
+

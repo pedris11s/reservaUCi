@@ -99,7 +99,7 @@
                 <!-- sidebar menu start-->
                 <ul class="sidebar-menu">
                 <li class="active">
-                    <a class="" href="">
+                    <a class="" href="{{ path('inicio') }}">
                                 <i class="icon_house_alt"></i>
                                 <span>Inicio</span>
                             </a>
@@ -111,7 +111,7 @@
                             </a>
                 </li>
                 <li>
-                    <a class="" href="">
+                    <a class="" href="{{ path('listar_reservaciones') }}">
                                 <i class="fa fa-tasks"></i>
                                 <span>Reservar</span>
                             </a>
@@ -123,7 +123,7 @@
             </aside>
         </section>
 
-        {% block body %}
+        {% block content %}
         {% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
