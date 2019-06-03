@@ -1,0 +1,24 @@
+{% extends "lista.html.twig" %}
+{% form_theme form 'form/reservacion_form.html.twig' %}
+
+
+{% block header %}<i class="fa fa-tasks"></i> Adicionar reservacion {% endblock %}
+
+{% block  miga %}
+    <li><a href=""><i class="fa fa-tasks"></i> Reservaciones </a></li>
+    <li><a href=""><i class="icon_plus"></i> Adicionar</a></li>
+{% endblock %}
+
+{% block cuerpo %}
+
+<div class='container'>
+    <div class='row'>
+        <div class='col-md-8'>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+
+ {% endblock %}

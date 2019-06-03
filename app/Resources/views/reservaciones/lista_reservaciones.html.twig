@@ -7,7 +7,7 @@
     <li><a href=""><i class="fa fa-tasks"></i> Reservaciones   </a></li>
 {% endblock %}
 
-{% block url_add %} {{ path('inicio') }} {% endblock %}
+{% block url_add %} {{ path('add_reservacion') }} {% endblock %}
 
 {% block table_name %} Reservaciones {% endblock %}
 
@@ -39,11 +39,11 @@
             <td>
                 <div class="btn-group">
                     {% if obj.estado %}
-                        <a class="btn btn-danger" href="" ><i class="icon_close"></i> Cancelar</a>
+                        <a class="btn btn-danger btn-xs" href="" ><i class="icon_close"></i> Cancelar</a>
                     {% else %}
-                        <a class="btn btn-success" href="" ><i class="icon_check"></i> Reservar</a>
+                        <a class="btn btn-success btn-xs" href="" ><i class="icon_check"></i> Reservar</a>
                     {% endif %}
-                    
+                    <a class="btn btn-danger btn-xs" href="" ><i class="fa fa-trash-o"></i> Eliminar</a>
                 </div>
             </td>
           </tr>
