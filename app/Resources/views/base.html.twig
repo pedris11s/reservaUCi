@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+
+        <link href="{{ asset('vendor/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('vendor/css/bootstrap-theme.css') }}" rel="stylesheet">
+        <link href="{{ asset('vendor/css/elegant-icons-style.css') }}" rel="stylesheet">
+        <link href="{{ asset('vendor/css/font-awesome.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('vendor/css/widgets.css') }}" rel="stylesheet">
+        <link href="{{ asset('vendor/css/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('vendor/css/style-responsive.css') }}" rel="stylesheet">
+        <link href="{{ asset('vendor/css/jquery-ui-1.10.4.min.css') }}" rel="stylesheet">
+
+        <script src="{{ asset('vendor/js/scripts.js') }}"></script>
+        <script src="{{ asset('vendor/js/jquery.autosize.min.js') }}"></script>
+
+        <script>
+            /* script para filtrar los estudiantes */
+            $(document).ready(function () {
+                    (function ($) {
+                        $('#filtrar').keyup(function () {
+                            var rex = new RegExp($(this).val(), 'i');
+                            $('.buscar tr').hide();
+                            $('.buscar tr').filter(function () {
+                                return rex.test($(this).text());
+                            }).show();
+                        })
+                    }(jQuery));
+                });
+            $(document).ready(function () {
+                    $("#err").hide();
+                    (function ($) {
+                        $('#filtrarest').keyup(function () {
+                            var val=$("#filtrarest").val();
+                            var obj=$("#est").find("option[value='"+val+"']");
+                            if(obj !=null && obj.length>0){
+                                $("#submit").removeAttr('disabled');
+                                $("#err").fadeOut(500);
+                            }
+                            else{
+                                $("#err").fadeIn(500);
+                                $("#submit").attr('disabled', 'disabled');
+                            }
+                        })
+                    }(jQuery));
+                });
+            </script>
+
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <section id="container" class="">
+
+
+            <header class="header dark-bg">
+            <div class="toggle-nav">
+                <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
+            </div>
+
+            <!--logo start-->
+            <a href="" class="logo">Reserva <span class="lite">UCi</span></a>
+            <!--logo end-->
+
+            <!--<div class="nav search-row" id="top_menu">
+                <!--  search form start --
+                <ul class="nav top-menu">
+                <li>
+                    <form class="navbar-form">
+                    <input class="form-control" placeholder="Search" type="text">
+                    </form>
+                </li>
+                </ul>
+                <!--  search form end 
+            </div>-->
+
+            <div class="top-nav notification-row">
+                <!-- notificatoin dropdown start-->
+                <ul class="nav pull-right top-menu">
+                <li>
+                    <a href=""><i class="icon_profile"></i></a>
+                </li>
+                <li>
+                    <a href=""><i class="fa fa-sign-out"></i>Salir</a>
+                </li>
+
+                <!-- user login dropdown end -->
+                </ul>
+                <!-- notificatoin dropdown end-->
+            </div>
+            </header>
+            <!--header end-->
+
+            <!--sidebar start-->
+            <aside>
+            <div id="sidebar" class="nav-collapse ">
+                <!-- sidebar menu start-->
+                <ul class="sidebar-menu">
+                <li class="active">
+                    <a class="" href="">
+                                <i class="icon_house_alt"></i>
+                                <span>Inicio</span>
+                            </a>
+                </li>
+                <li>
+                    <a class="" href="">
+                                <i class="fa fa-user"></i>
+                                <span>Usuarios</span>
+                            </a>
+                </li>
+                <li>
+                    <a class="" href="">
+                                <i class="icon_group"></i>
+                                <span>Eventos</span>
+                            </a>
+                </li>
+
+                <li>
+                    <a class="" href="">
+                                <i class="icon_book"></i>
+                                <span>Postgrados</span>
+                            </a>
+                </li>
+
+                <li>
+                    <a class="" href="">
+                                <i class="fa fa-tasks"></i>
+                                <span>Solicitudes</span>
+                            </a>
+                </li>
+
+                </ul>
+                <!-- sidebar menu end-->
+            </div>
+            </aside>
+        </section>
+
+        {% block body %}
+        {% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
