@@ -28,7 +28,10 @@ class DefaultController extends Controller
         //$repo = $this->getDoctrine()->getRepository(Usuario::class);
         //$usuarios = $repo->findAll();
         //var_dump($reservaciones);
-        return $this->render('usuarios/lista_usuarios.html.twig');
+        $repo = $this->getDoctrine()->getRepository(Usuario::class);
+        $usuarios = $repo->findAll();
+
+        return $this->render('usuarios/lista_usuarios.html.twig', array('users'=>$usuarios));
     }
 
      /**

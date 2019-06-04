@@ -10,3 +10,24 @@
 {% block table_name%} Usuarios {% endblock %}
 
 {% block url_add %} {{ path('add_user') }} {% endblock %}
+
+{% block table %}
+    <thead>
+        <tr>
+          <th><i class=""></i> Username</th>
+          <th><i class="icon_cogs"></i> Actions</th>
+        </tr>
+      </thead>
+      <tbody class="buscar">
+      {% for obj in users %}
+          <tr>
+            <th>  {{ obj.username }} </th>  
+            <td>
+                <div class="btn-group">
+                    <a class="btn btn-danger btn-xs" href="" ><i class="fa fa-trash-o"></i> Eliminar</a>
+                </div>
+            </td>
+          </tr>
+      {% endfor %}
+    </tbody>
+{% endblock %}
