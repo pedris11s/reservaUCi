@@ -112,6 +112,11 @@ class Reservacion
         return $this->id;
     }
 
+
+    public function getUsuarios()
+    {
+        return $this->usuarios;
+    }
     /**
      * Set origen
      *

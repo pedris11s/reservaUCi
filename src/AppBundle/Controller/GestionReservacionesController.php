@@ -75,17 +75,21 @@ class GestionReservacionesController extends Controller
      */
     public function reservarAction(Request $request, $id=null, Security $security)
     {   
-        $userid = $security->getUser()->getId();;
-
-        $em = $this->getDoctrine()->getManager();
         if($id != null){
+            $em = $this->getDoctrine()->getManager();
+
+            $userid = $security->getUser()->getId();
             $user = $em->getRepository(Usuario::class)->find($userid); 
-            $obj = $em->getRepository(Reservacion::class)->find($id);
-            $obj->addUsuario($user);
+
+            $reservacion = $em->getRepository(Reservacion::class)->find($id);
+
+            if( $reservacion->getUsuarios()->contains($user) )
+                $reservacion->removeUsuario($user);
+            else
+                $reservacion->addUsuario($user);
+
             $em->flush();
-            
         }
-        //$reservaciones = $em->getRepository(Reservacion::class)->findAll();
         return $this->redirectToRoute('listar_reservaciones');
         
     }

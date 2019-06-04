@@ -68,7 +68,7 @@ class Usuario implements UserInterface
     /**
      * @param Reservacion $reservacion
      */
-    public function removeUser(Reservacion $reservacion)
+    public function removeReservacion(Reservacion $reservacion)
     {
         if (!$this->reservaciones->contains($reservacion)) {
             return;
