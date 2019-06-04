@@ -24,7 +24,7 @@
             <th>  {{ obj.username }} </th>  
             <td>
                 <div class="btn-group">
-                    <a class="btn btn-danger btn-xs" href="" ><i class="fa fa-trash-o"></i> Eliminar</a>
+                    <a class="btn btn-danger btn-xs" href="{{ path('del_usuario', {'id': obj.id }) }}"  ><i class="fa fa-trash-o"></i> Eliminar</a>
                 </div>
             </td>
           </tr>

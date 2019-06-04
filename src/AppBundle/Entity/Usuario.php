@@ -50,6 +50,15 @@ class Usuario implements UserInterface
 
     // other properties and methods
 
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     public function getUsername()
     {
