@@ -7,6 +7,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * @ORM\Entity
  * @UniqueEntity(fields="username", message="Username already taken")
@@ -31,23 +33,49 @@ class Usuario implements UserInterface
     private $plainPassword;
 
     /**
-     * The below length depends on the "algorithm" you use for encoding
-     * the password, but this works well with bcrypt.
-     *
      * @ORM\Column(type="string", length=64)
      */
     private $password;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column(type="string", length=256)
      */
     private $roles;
 
+     /**
+     * @var \Doctrine\Common\Collections\Collection|Reservacion[]
+     *
+     * @ORM\ManyToMany(targetEntity="Reservacion", mappedBy="usuarios")
+     */
+    protected $reservaciones;
+
     public function __construct()
     {
-        $this->roles = ['ROLE_USER'];
+        $this->reservaciones = new ArrayCollection();
     }
-
+    
+    /**
+     * @param Reservacion $reservacion
+     */
+    public function addReservacion(Reservacion $reservacion)
+    {
+        if ($this->reservaciones->contains($reservacion)) {
+            return;
+        }
+        $this->reservaciones->add($reservacion);
+        $reservacion->addUsuario($this);
+    }
+    /**
+     * @param Reservacion $reservacion
+     */
+    public function removeUser(Reservacion $reservacion)
+    {
+        if (!$this->reservaciones->contains($reservacion)) {
+            return;
+        }
+        $this->reservaciones->removeElement($reservacion);
+        $reservacion->removeUsuario($this);
+    }
     // other properties and methods
 
     /**
@@ -89,7 +117,14 @@ class Usuario implements UserInterface
 
     public function getRoles()
     {
-        return $this->roles;
+        $roles = json_decode($this->roles);
+        return $roles;
+    }
+
+    public function setRoles($roles)
+    {
+        $roles_json = json_encode($roles);
+        return $this->roles=$roles_json;
     }
 
     public function eraseCredentials()

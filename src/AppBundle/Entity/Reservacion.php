@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Reservacion
@@ -56,6 +57,50 @@ class Reservacion
      */
     private $estado;
 
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection|Usuario[]
+     *
+     * @ORM\ManyToMany(targetEntity="Usuario", inversedBy="reservaciones")
+     * @ORM\JoinTable(
+     *  name="reservaciones_usuarios",
+     *  joinColumns={
+     *      @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *  },
+     *  inverseJoinColumns={
+     *      @ORM\JoinColumn(name="reservacion_id", referencedColumnName="id")
+     *  }
+     * )
+     */
+    protected $usuarios;
+
+    public function __construct()
+    {
+        $this->usuarios = new ArrayCollection();
+    }
+
+    /**
+     * @param Usuario $usuario
+     */
+    public function addUsuario(Usuario $usuario)
+    {
+        if ($this->usuarios->contains($usuario)) {
+            return;
+        }
+        $this->usuarios->add($usuario);
+        $usuario->addReservacion($this);
+    }
+    /**
+     * @param Usuario $usuario
+     */
+    public function removeUsuario(Usuario $usuario)
+    {
+        if (!$this->usuarios->contains($usuario)) {
+            return;
+        }
+        $this->usuarios->removeElement($usuario);
+        $usuario->removeReservacion($this);
+    }
 
     /**
      * Get id
