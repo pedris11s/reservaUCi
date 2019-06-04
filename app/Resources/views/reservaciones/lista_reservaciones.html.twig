@@ -27,6 +27,7 @@
       </thead>
       <tbody class="buscar">
       {% for obj in reservaciones %}
+       
           <tr>
             <th>  {{ obj.origen }} </th>  
             <th>  {{ obj.destino }} </th>  
@@ -43,9 +44,9 @@
                 <div class="btn-group">
                     {% if 'ROLE_USER' in app.user.roles %}
                         {% if obj.estado %}
-                            <a class="btn btn-danger btn-xs" href="" ><i class="icon_close"></i> Cancelar</a>
+                            <a class="btn btn-danger btn-xs" href="{{ path('reservar', {'id': obj.id }) }}" ><i class="icon_close"></i> Cancelar</a>
                         {% else %}
-                            <a class="btn btn-success btn-xs" href="" ><i class="icon_check"></i> Reservar</a>
+                            <a class="btn btn-success btn-xs" href="{{ path('reservar', {'id': obj.id }) }}" ><i class="icon_check"></i> Reservar</a>
                         {% endif %}
                     {% endif %}
 

@@ -9,6 +9,9 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Reservacion;
 use AppBundle\Form\ReservacionType;
 
+use Symfony\Component\Security\Core\Security;
+use AppBundle\Entity\Usuario;
+
 /**
  * @Route("/reservaciones")
  */
@@ -62,8 +65,28 @@ class GestionReservacionesController extends Controller
             $em->flush();
             
         }
-        $reservaciones = $em->getRepository(Reservacion::class)->findAll();
-        return $this->render('reservaciones/lista_reservaciones.html.twig', array('reservaciones'=>$reservaciones));
+        //$reservaciones = $em->getRepository(Reservacion::class)->findAll();
+        return $this->redirectToRoute('listar_reservaciones');
+        
+    }
+
+    /**
+     * @Route("/reservar/{id}", name="reservar")
+     */
+    public function reservarAction(Request $request, $id=null, Security $security)
+    {   
+        $userid = $security->getUser()->getId();;
+
+        $em = $this->getDoctrine()->getManager();
+        if($id != null){
+            $user = $em->getRepository(Usuario::class)->find($userid); 
+            $obj = $em->getRepository(Reservacion::class)->find($id);
+            $obj->addUsuario($user);
+            $em->flush();
+            
+        }
+        //$reservaciones = $em->getRepository(Reservacion::class)->findAll();
+        return $this->redirectToRoute('listar_reservaciones');
         
     }
 }

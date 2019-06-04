@@ -65,8 +65,7 @@ class GestionUsuarioController extends Controller
             
         }
         $usuarios = $em->getRepository(Usuario::class)->findAll();
-        return $this->render('usuarios/lista_usuarios.html.twig', array('users'=>$usuarios));
-        
+        return $this->redirectToRoute('listar_usuarios');
     }
 }
 

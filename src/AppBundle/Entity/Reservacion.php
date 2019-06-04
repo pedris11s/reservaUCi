@@ -65,10 +65,10 @@ class Reservacion
      * @ORM\JoinTable(
      *  name="reservaciones_usuarios",
      *  joinColumns={
-     *      @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *      @ORM\JoinColumn(name="reservacion_id", referencedColumnName="id")
      *  },
      *  inverseJoinColumns={
-     *      @ORM\JoinColumn(name="reservacion_id", referencedColumnName="id")
+     *      @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      *  }
      * )
      */
