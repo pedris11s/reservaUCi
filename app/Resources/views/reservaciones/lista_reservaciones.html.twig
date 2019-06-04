@@ -27,14 +27,13 @@
       </thead>
       <tbody class="buscar">
       {% for obj in reservaciones %}
-       
           <tr>
             <th>  {{ obj.origen }} </th>  
             <th>  {{ obj.destino }} </th>  
             <th>  {{ obj.fecha }} </th>  
             <th>  {{ obj.tipo }} </th>  
             {% if 'ROLE_USER' in app.user.roles %}
-                {% if obj.estado %}
+                {% if app.user in obj.usuarios %}
                     <td> <span class="label label-success">Reservado</span> </td>
                 {% else %}
                     <td> <span class="label label-danger">No reservado</span> </td>
@@ -43,7 +42,7 @@
             <td>
                 <div class="btn-group">
                     {% if 'ROLE_USER' in app.user.roles %}
-                        {% if obj.estado %}
+                        {% if app.user in obj.usuarios %}
                             <a class="btn btn-danger btn-xs" href="{{ path('reservar', {'id': obj.id }) }}" ><i class="icon_close"></i> Cancelar</a>
                         {% else %}
                             <a class="btn btn-success btn-xs" href="{{ path('reservar', {'id': obj.id }) }}" ><i class="icon_check"></i> Reservar</a>
