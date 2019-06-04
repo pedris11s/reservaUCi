@@ -7,6 +7,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Reservacion;
 use AppBundle\Entity\Usuario;
+use AppBundle\Form\UsuarioType;
+
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class DefaultController extends Controller
 {
@@ -17,7 +20,6 @@ class DefaultController extends Controller
     {
         return $this->render('inicio/index.html.twig');
     }
-
     /**
      * @Route("/listar_usuarios", name="listar_usuarios")
      */
@@ -27,6 +29,31 @@ class DefaultController extends Controller
         //$usuarios = $repo->findAll();
         //var_dump($reservaciones);
         return $this->render('usuarios/lista_usuarios.html.twig');
+    }
+
+     /**
+     * @Route("/add_user", name="add_user")
+     */
+    public function addUserAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $user = new Usuario();
+        $form = $this->createForm(UsuarioType::class, $user);
+
+        $form = $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            
+            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+            $user->setPassword($password);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('listar_usuarios');
+        }
+
+        // //var_dump($reservaciones);
+        return $this->render('reservaciones/add_reservacion.html.twig', array('form'=> $form->createView()));
     }
 }
 

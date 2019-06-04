@@ -8,5 +8,16 @@
 {% endblock %}
 
 {% block table_name%} Usuarios {% endblock %}
+{% block cuerpo %}
 
-{% block url_add %} {{ path('add_user') }} {% endblock %}
+<div class='container'>
+    <div class='row'>
+        <div class='col-md-8'>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+
+ {% endblock %}
