@@ -49,5 +49,22 @@ class GestionReservacionesController extends Controller
         // //var_dump($reservaciones);
         return $this->render('reservaciones/add_reservacion.html.twig', array('form'=> $form->createView()));
     }
+
+    /**
+     * @Route("/delete/{id}", name="del_reservacion")
+     */
+    public function deleteReservacionAction(Request $request, $id=null)
+    {
+        $em = $this->getDoctrine()->getManager();
+        if($id != null){
+            $obj = $em->getRepository(Reservacion::class)->find($id);
+            $em->remove($obj);
+            $em->flush();
+            
+        }
+        $reservaciones = $em->getRepository(Reservacion::class)->findAll();
+        return $this->render('reservaciones/lista_reservaciones.html.twig', array('reservaciones'=>$reservaciones));
+        
+    }
 }
 

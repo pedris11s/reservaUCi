@@ -25,9 +25,6 @@ class DefaultController extends Controller
      */
     public function listarUsuariosAction(Request $request)
     {
-        //$repo = $this->getDoctrine()->getRepository(Usuario::class);
-        //$usuarios = $repo->findAll();
-        //var_dump($reservaciones);
         $repo = $this->getDoctrine()->getRepository(Usuario::class);
         $usuarios = $repo->findAll();
 
@@ -54,8 +51,6 @@ class DefaultController extends Controller
 
             return $this->redirectToRoute('listar_usuarios');
         }
-
-        // //var_dump($reservaciones);
         return $this->render('reservaciones/add_reservacion.html.twig', array('form'=> $form->createView()));
     }
 }

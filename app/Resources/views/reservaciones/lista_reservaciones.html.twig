@@ -43,7 +43,7 @@
                     {% else %}
                         <a class="btn btn-success btn-xs" href="" ><i class="icon_check"></i> Reservar</a>
                     {% endif %}
-                    <a class="btn btn-danger btn-xs" href="" ><i class="fa fa-trash-o"></i> Eliminar</a>
+                    <a class="btn btn-danger btn-xs" href="{{ path('del_reservacion', {'id': obj.id }) }}" ><i class="fa fa-trash-o"></i> Eliminar</a>
                 </div>
             </td>
           </tr>
