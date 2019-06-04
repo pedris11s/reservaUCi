@@ -6,8 +6,10 @@ security:
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-        in_memory:
-            memory: ~
+        our_db_provider:
+            entity:
+                class: AppBundle:Usuario
+                property: username
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -17,6 +19,17 @@ security:
 
         main:
             anonymous: ~
+            provider: our_db_provider
+            form_login:
+                login_path: login
+                check_path: login
+            logout:
+                path: /logout
+                target: /login
+    access_control:
+        - { path: ^/usuarios, roles: ROLE_ADMIN }
+        - { path: ^/reservaciones/del, roles: ROLE_ADMIN }
+        - { path: ^/reservaciones/add, roles: ROLE_ADMIN }
             # activate different ways to authenticate
 
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate

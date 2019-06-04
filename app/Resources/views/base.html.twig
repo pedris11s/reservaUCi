@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Reserva UCi{% endblock %}</title>
 
         <link href="{{ asset('vendor/css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ asset('vendor/css/bootstrap-theme.css') }}" rel="stylesheet">
@@ -80,10 +80,10 @@
                 <!-- notificatoin dropdown start-->
                 <ul class="nav pull-right top-menu">
                 <li>
-                    <a href=""><i class="icon_profile"></i></a>
+                    <a href=""><i class="icon_profile"></i>{{ app.user.username }}</a>
                 </li>
                 <li>
-                    <a href=""><i class="fa fa-sign-out"></i>Salir</a>
+                    <a href="{{ path('logout')  }}"><i class="fa fa-sign-out"></i>Salir</a>
                 </li>
 
                 <!-- user login dropdown end -->
@@ -104,16 +104,19 @@
                                 <span>Inicio</span>
                             </a>
                 </li>
-                <li>
-                    <a class="" href="{{ path('listar_usuarios') }}">
-                                <i class="fa fa-user"></i>
-                                <span>Usuarios</span>
-                            </a>
-                </li>
+
+                {% if 'ROLE_ADMIN' in app.user.roles %}
+                    <li>
+                        <a class="" href="{{ path('listar_usuarios') }}">
+                                    <i class="fa fa-user"></i>
+                                    <span>Usuarios</span>
+                                </a>
+                    </li>
+                {% endif %}
                 <li>
                     <a class="" href="{{ path('listar_reservaciones') }}">
                                 <i class="fa fa-tasks"></i>
-                                <span>Reservar</span>
+                                <span>Reservaciones</span>
                             </a>
                 </li>
 

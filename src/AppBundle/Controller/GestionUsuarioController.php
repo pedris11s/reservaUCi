@@ -41,6 +41,8 @@ class GestionUsuarioController extends Controller
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
 
+            $user->setRoles(array('ROLE_USER'));
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
