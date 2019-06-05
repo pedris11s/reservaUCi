@@ -13,11 +13,12 @@
         <link href="{{ asset('vendor/css/style-responsive.css') }}" rel="stylesheet">
         <link href="{{ asset('vendor/css/jquery-ui-1.10.4.min.css') }}" rel="stylesheet">
 
-        <script src="{{ asset('vendor/js/scripts.js') }}"></script>
-        <script src="{{ asset('vendor/js/jquery.autosize.min.js') }}"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
+                crossorigin="anonymous">
+        </script>
 
         <script>
-            /* script para filtrar los estudiantes */
             $(document).ready(function () {
                     (function ($) {
                         $('#filtrar').keyup(function () {
@@ -29,23 +30,6 @@
                         })
                     }(jQuery));
                 });
-            $(document).ready(function () {
-                    $("#err").hide();
-                    (function ($) {
-                        $('#filtrarest').keyup(function () {
-                            var val=$("#filtrarest").val();
-                            var obj=$("#est").find("option[value='"+val+"']");
-                            if(obj !=null && obj.length>0){
-                                $("#submit").removeAttr('disabled');
-                                $("#err").fadeOut(500);
-                            }
-                            else{
-                                $("#err").fadeIn(500);
-                                $("#submit").attr('disabled', 'disabled');
-                            }
-                        })
-                    }(jQuery));
-                });
             </script>
 
         {% block stylesheets %}{% endblock %}
@@ -53,8 +37,6 @@
     </head>
     <body>
         <section id="container" class="">
-
-
             <header class="header dark-bg">
             <div class="toggle-nav">
                 <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
