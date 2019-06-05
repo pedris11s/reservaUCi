@@ -65,7 +65,7 @@ class GestionUsuarioController extends Controller
     }
 
     /**
-     * @Route("/{id}/delete", name="del_usuario")
+     * @Route("/delete/{id}", name="del_usuario")
      */
     public function deleteUsuarioAction(Request $request, $id=null, Security $security)
     {   
@@ -85,7 +85,7 @@ class GestionUsuarioController extends Controller
     }
 
     /**
-     * @Route("/{id}/edit", name="edit_usuario")
+     * @Route("/edit/{id}", name="edit_usuario")
      */
     public function editUsuarioAction(Request $request, $id=null, Security $security)
     {   

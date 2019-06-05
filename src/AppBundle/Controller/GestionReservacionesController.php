@@ -60,7 +60,7 @@ class GestionReservacionesController extends Controller
     }
 
     /**
-     * @Route("/{id}/delete", name="del_reservacion")
+     * @Route("/delete/{id}", name="del_reservacion")
      */
     public function deleteReservacionAction(Request $request, $id=null, Security $security)
     {   
@@ -81,7 +81,7 @@ class GestionReservacionesController extends Controller
     }
 
     /**
-     * @Route("/{id}/reservar", name="reservar")
+     * @Route("/reservar/{id}", name="reservar")
      */
     public function reservarAction(Request $request, $id=null, Security $security)
     {   
@@ -104,7 +104,7 @@ class GestionReservacionesController extends Controller
     }
 
     /**
-     * @Route("/{id}/edit", name="edit_reservacion")
+     * @Route("/edit/{id}", name="edit_reservacion")
      */
     public function editReservacionAction(Request $request, $id=null, Security $security)
     {   

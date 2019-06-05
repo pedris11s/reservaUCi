@@ -27,9 +27,11 @@ security:
                 path: /logout
                 target: /login
     access_control:
+        - { path: ^/usuarios/123/delete, roles: ROLE_ROOT }
         - { path: ^/usuarios, roles: ROLE_ADMIN }
-        - { path: ^/reservaciones/del, roles: ROLE_ADMIN }
-        - { path: ^/reservaciones/add, roles: ROLE_ADMIN }
+        - { path: ^/reservaciones/delete/, roles: ROLE_ADMIN }
+        - { path: ^/reservaciones/edit/, roles: ROLE_ADMIN }
+        - { path: ^/reservaciones/add/, roles: ROLE_ADMIN }
             # activate different ways to authenticate
 
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
