@@ -1,0 +1,29 @@
+{% extends "lista.html.twig" %}
+{% form_theme form 'form/reservacion_form.html.twig' %}
+
+{% block header %}<i class="icon_group"></i> Usuarios {% endblock %}
+
+{% block  miga %}
+    <li><a href=""><i class="icon_group"></i> Usuarios  </a></li>
+    <li><a href=""><i class="icon_pencil"></i> Editar</a></li>
+{% endblock %}
+
+{% block table_name%} Usuarios {% endblock %}
+{% block cuerpo %}
+
+    <section class='panel'>
+        <header class="panel-heading">Editar usuario</header>
+        <div class='panel-body'>
+            <div class='container'>
+                <div class='row'>
+                    <div class='col-md-8'>
+                        {{ form_start(form) }}
+                        {{ form_widget(form) }}
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+ {% endblock %}

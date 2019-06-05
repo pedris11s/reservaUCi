@@ -7,11 +7,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Reservacion;
 use AppBundle\Entity\Usuario;
+
 use AppBundle\Form\UsuarioType;
+use AppBundle\Form\EditUsuarioType;
 
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 use Symfony\Component\Security\Core\Security;
+
 
 /**
  * @Route("/usuarios")
@@ -62,7 +65,7 @@ class GestionUsuarioController extends Controller
     }
 
     /**
-     * @Route("/delete/{id}", name="del_usuario")
+     * @Route("/{id}/delete", name="del_usuario")
      */
     public function deleteUsuarioAction(Request $request, $id=null, Security $security)
     {   
@@ -79,6 +82,33 @@ class GestionUsuarioController extends Controller
         }
         $usuarios = $em->getRepository(Usuario::class)->findAll();
         return $this->redirectToRoute('listar_usuarios');
+    }
+
+    /**
+     * @Route("/{id}/edit", name="edit_usuario")
+     */
+    public function editUsuarioAction(Request $request, $id=null, Security $security)
+    {   
+        $user = $security->getUser();
+        if($user == NULL)
+            return $this->redirectToRoute('login');   
+        
+        $em = $this->getDoctrine()->getManager();
+        
+        $usuario = $em->getRepository(Usuario::class)->find($id);
+        
+        $form = $this->createForm(EditUsuarioType::class, $usuario);
+
+        $form = $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($usuario);
+            $em->flush();
+
+            return $this->redirectToRoute('listar_usuarios');
+        }
+        return $this->render('usuarios/edit_usuario.html.twig', array('form'=> $form->createView()));
     }
 }
 

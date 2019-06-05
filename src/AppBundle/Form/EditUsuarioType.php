@@ -12,7 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-class UsuarioType extends AbstractType
+
+class EditUsuarioType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options){
 
@@ -20,7 +21,6 @@ class UsuarioType extends AbstractType
             ->add('nombre', TextType::class)
             ->add('apellidos', TextType::class)
             ->add('username', TextType::class,array('label' => 'Usuario'))
-            ->add('plainPassword', PasswordType::class, array('label' => 'Contraseña'))
             ->add('provincia', ChoiceType::class, array('choices' => 
                 [
                     'Pinar del Río' => 'Pinar del Río', 
@@ -39,7 +39,7 @@ class UsuarioType extends AbstractType
                     'Santiago de Cuba' => 'Santiago de Cuba',
                     'Guantánamo' => 'Guantánamo',
                 ]))
-            ->add('register', SubmitType::class, array('label' => 'Adicionar'))
+            ->add('edit', SubmitType::class, array('label' => 'Editar'))
         ;
     }   
     

@@ -30,6 +30,7 @@
             <th>  {{ obj.roles|join(', ') }} </th>  
             <td>
                 <div class="btn-group">
+                    <a class="btn btn-info btn-xs" href="{{ path('edit_usuario', {'id': obj.id }) }}"  ><i class="icon_pencil"></i> Editar</a>
                     <a class="btn btn-danger btn-xs" href="{{ path('del_usuario', {'id': obj.id }) }}"  ><i class="fa fa-trash-o"></i> Eliminar</a>
                 </div>
             </td>
