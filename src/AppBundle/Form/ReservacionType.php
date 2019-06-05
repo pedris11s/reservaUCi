@@ -15,12 +15,46 @@ class ReservacionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options){
 
         $builder 
-            ->add('origen', TextType::class)
-            ->add('destino', TextType::class)
+        ->add('origen', ChoiceType::class, array('choices' => 
+        [
+            'Pinar del Río' => 'Pinar del Río', 
+            'Artemisa' => 'Artemisa',
+            'La Habana' => 'La Habana',
+            'Mayabeque' => 'Mayabeque',
+            'Matanzas' => 'Matanzas',
+            'Villa Clara' => 'Villa Clara',
+            'Cienfuegos' => 'Cienfuegos Clara',
+            'Sancti Spiritus' => 'Sancti Spiritus',
+            'Ciego de Avila' => 'Ciego de Avila',
+            'Camaguey' => 'Camaguey',
+            'Las Tunas' => 'Las Tunas',
+            'Holguín' => 'Holguín',
+            'Granma' => 'Granma',
+            'Santiago de Cuba' => 'Santiago de Cuba',
+            'Guantánamo' => 'Guantánamo',
+        ]))
+        ->add('destino', ChoiceType::class, array('choices' => 
+                [
+                    'Pinar del Río' => 'Pinar del Río', 
+                    'Artemisa' => 'Artemisa',
+                    'La Habana' => 'La Habana',
+                    'Mayabeque' => 'Mayabeque',
+                    'Matanzas' => 'Matanzas',
+                    'Villa Clara' => 'Villa Clara',
+                    'Cienfuegos' => 'Cienfuegos Clara',
+                    'Sancti Spiritus' => 'Sancti Spiritus',
+                    'Ciego de Avila' => 'Ciego de Avila',
+                    'Camaguey' => 'Camaguey',
+                    'Las Tunas' => 'Las Tunas',
+                    'Holguín' => 'Holguín',
+                    'Granma' => 'Granma',
+                    'Santiago de Cuba' => 'Santiago de Cuba',
+                    'Guantánamo' => 'Guantánamo',
+                ]))
             ->add('fecha', DateTimeType::class, [
                 'placeholder' => [
-                    'year' => 'Year', 'month' => 'Month', 'day' => 'Day',
-                    'hour' => 'Hour', 'minute' => 'Minute', 'second' => 'Second',
+                    'year' => 'Año', 'month' => 'Mes', 'day' => 'Dia',
+                    'hour' => 'Hora', 'minute' => 'Minuto', 'second' => 'Second',
                 ]
             ])
             ->add('tipo', ChoiceType::class, array('choices' => ['Ida' => 'Ida', 'Regreso' => 'Regreso']))

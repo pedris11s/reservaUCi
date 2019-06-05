@@ -11,14 +11,20 @@
 
 {% block cuerpo %}
 
-<div class='container'>
-    <div class='row'>
-        <div class='col-md-8'>
-            {{ form_start(form) }}
-            {{ form_widget(form) }}
-            {{ form_end(form) }}
+    <section class='panel'>
+        <header class="panel-heading">Adicionar reservacion</header>
+        <div class='panel-body'>
+            <div class='container'>
+                <div class='row'>
+                    <div class='col-md-8'>
+                        {{ form_start(form) }}
+                        {{ form_widget(form) }}
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
+    </section>
+
 
  {% endblock %}

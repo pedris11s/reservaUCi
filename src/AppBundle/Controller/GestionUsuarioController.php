@@ -32,8 +32,7 @@ class GestionUsuarioController extends Controller
 
         return $this->render('usuarios/lista_usuarios.html.twig', array('users'=>$usuarios));
     }
-
-     /**
+    /**
      * @Route("/add", name="add_user")
      */
     public function addUserAction(Request $request, UserPasswordEncoderInterface $passwordEncoder, Security $security)
@@ -51,7 +50,7 @@ class GestionUsuarioController extends Controller
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
 
-            $user->setRoles(array('ROLE_USER'));
+            $user->setRoles(array('USER'));
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);

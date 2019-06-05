@@ -38,6 +38,21 @@ class Usuario implements UserInterface
     private $password;
 
     /**
+     * @ORM\Column(type="string", length=64)
+     */
+    private $nombre;
+
+    /**
+     * @ORM\Column(type="string", length=64)
+     */
+    private $apellidos;
+
+    /**
+     * @ORM\Column(type="string", length=64)
+     */
+    private $provincia;
+
+    /**
      * @ORM\Column(type="string", length=256)
      */
     private $roles;
@@ -139,5 +154,35 @@ class Usuario implements UserInterface
     public function setPlainPassword($password)
     {
         $this->plainPassword = $password;
+    }
+
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+    }
+
+    public function getApellidos()
+    {
+        return $this->apellidos;
+    }
+
+    public function setApellidos($apellidos)
+    {
+        $this->apellidos = $apellidos;
+    }
+
+    public function getProvincia()
+    {
+        return $this->provincia;
+    }
+
+    public function setProvincia($provincia)
+    {
+        $this->provincia = $provincia;
     }
 }
