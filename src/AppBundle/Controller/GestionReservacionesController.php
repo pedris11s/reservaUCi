@@ -20,8 +20,12 @@ class GestionReservacionesController extends Controller
     /**
      * @Route("/listar", name="listar_reservaciones")
      */
-    public function listarReservacionesAction(Request $request)
-    {
+    public function listarReservacionesAction(Request $request, Security $security)
+    {   
+        $user = $security->getUser();
+        if($user == NULL)
+            return $this->redirectToRoute('login');   
+
         $repo = $this->getDoctrine()->getRepository(Reservacion::class);
         $reservaciones = $repo->findAll();
 
@@ -31,8 +35,12 @@ class GestionReservacionesController extends Controller
     /**
      * @Route("/add", name="add_reservacion")
      */
-    public function addReservacionAction(Request $request)
-    {
+    public function addReservacionAction(Request $request, Security $security)
+    {   
+        $user = $security->getUser();
+        if($user == NULL)
+            return $this->redirectToRoute('login');   
+
         $obj = new Reservacion();
         $form = $this->createForm(ReservacionType::class, $obj);
 
@@ -56,8 +64,12 @@ class GestionReservacionesController extends Controller
     /**
      * @Route("/delete/{id}", name="del_reservacion")
      */
-    public function deleteReservacionAction(Request $request, $id=null)
-    {
+    public function deleteReservacionAction(Request $request, $id=null, Security $security)
+    {   
+        $user = $security->getUser();
+        if($user == NULL)
+            return $this->redirectToRoute('login');   
+            
         $em = $this->getDoctrine()->getManager();
         if($id != null){
             $obj = $em->getRepository(Reservacion::class)->find($id);

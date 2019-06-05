@@ -11,6 +11,8 @@ use AppBundle\Form\UsuarioType;
 
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
+use Symfony\Component\Security\Core\Security;
+
 /**
  * @Route("/usuarios")
  */
@@ -19,8 +21,12 @@ class GestionUsuarioController extends Controller
     /**
      * @Route("/listar", name="listar_usuarios")
      */
-    public function listarUsuariosAction(Request $request)
-    {
+    public function listarUsuariosAction(Request $request, Security $security)
+    {   
+        $user = $security->getUser();
+        if($user == NULL)
+            return $this->redirectToRoute('login');   
+            
         $repo = $this->getDoctrine()->getRepository(Usuario::class);
         $usuarios = $repo->findAll();
 
@@ -30,8 +36,12 @@ class GestionUsuarioController extends Controller
      /**
      * @Route("/add", name="add_user")
      */
-    public function addUserAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
-    {
+    public function addUserAction(Request $request, UserPasswordEncoderInterface $passwordEncoder, Security $security)
+    {   
+        $user = $security->getUser();
+        if($user == NULL)
+            return $this->redirectToRoute('login');   
+            
         $user = new Usuario();
         $form = $this->createForm(UsuarioType::class, $user);
 
@@ -55,8 +65,12 @@ class GestionUsuarioController extends Controller
     /**
      * @Route("/delete/{id}", name="del_usuario")
      */
-    public function deleteUsuarioAction(Request $request, $id=null)
-    {
+    public function deleteUsuarioAction(Request $request, $id=null, Security $security)
+    {   
+        $user = $security->getUser();
+        if($user == NULL)
+            return $this->redirectToRoute('login');   
+            
         $em = $this->getDoctrine()->getManager();
         if($id != null){
             $obj = $em->getRepository(Usuario::class)->find($id);
