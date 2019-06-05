@@ -59,7 +59,7 @@ class GestionUsuarioController extends Controller
 
             return $this->redirectToRoute('listar_usuarios');
         }
-        return $this->render('reservaciones/add_reservacion.html.twig', array('form'=> $form->createView()));
+        return $this->render('usuarios/add_usuario.html.twig', array('form'=> $form->createView()));
     }
 
     /**
