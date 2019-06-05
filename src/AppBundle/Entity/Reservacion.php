@@ -37,9 +37,9 @@ class Reservacion
     private $destino;
 
     /**
-     * @var string
+     * @var \DateTime
      *
-     * @ORM\Column(name="fecha", type="string", length=255)
+     * @ORM\Column(name="fecha", type="datetime")
      */
     private $fecha;
 
@@ -49,14 +49,6 @@ class Reservacion
      * @ORM\Column(name="tipo", type="string", length=10)
      */
     private $tipo;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="estado", type="boolean")
-     */
-    private $estado;
-
 
     /**
      * @var \Doctrine\Common\Collections\Collection|Usuario[]
@@ -168,9 +160,9 @@ class Reservacion
     /**
      * Set fecha
      *
-     * @param string $fecha
+     * @param \DateTime $fecha
      *
-     * @return Reservacion
+     * @return test
      */
     public function setFecha($fecha)
     {
@@ -182,7 +174,7 @@ class Reservacion
     /**
      * Get fecha
      *
-     * @return string
+     * @return \DateTime
      */
     public function getFecha()
     {
@@ -213,28 +205,6 @@ class Reservacion
         return $this->tipo;
     }
 
-    /**
-     * Set estado
-     *
-     * @param boolean $estado
-     *
-     * @return Reservacion
-     */
-    public function setEstado($estado)
-    {
-        $this->estado = $estado;
 
-        return $this;
-    }
-
-    /**
-     * Get estado
-     *
-     * @return bool
-     */
-    public function getEstado()
-    {
-        return $this->estado;
-    }
 }
 

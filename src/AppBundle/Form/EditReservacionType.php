@@ -12,30 +12,30 @@ use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ReservacionType extends AbstractType
+class EditReservacionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options){
 
         $builder 
-        ->add('origen', ChoiceType::class, array('choices' => 
-        [
-            'Pinar del Río' => 'Pinar del Río', 
-            'Artemisa' => 'Artemisa',
-            'La Habana' => 'La Habana',
-            'Mayabeque' => 'Mayabeque',
-            'Matanzas' => 'Matanzas',
-            'Villa Clara' => 'Villa Clara',
-            'Cienfuegos' => 'Cienfuegos Clara',
-            'Sancti Spiritus' => 'Sancti Spiritus',
-            'Ciego de Avila' => 'Ciego de Avila',
-            'Camaguey' => 'Camaguey',
-            'Las Tunas' => 'Las Tunas',
-            'Holguín' => 'Holguín',
-            'Granma' => 'Granma',
-            'Santiago de Cuba' => 'Santiago de Cuba',
-            'Guantánamo' => 'Guantánamo',
-        ]))
-        ->add('destino', ChoiceType::class, array('choices' => 
+            ->add('origen', ChoiceType::class, array('choices' => 
+            [
+                'Pinar del Río' => 'Pinar del Río', 
+                'Artemisa' => 'Artemisa',
+                'La Habana' => 'La Habana',
+                'Mayabeque' => 'Mayabeque',
+                'Matanzas' => 'Matanzas',
+                'Villa Clara' => 'Villa Clara',
+                'Cienfuegos' => 'Cienfuegos Clara',
+                'Sancti Spiritus' => 'Sancti Spiritus',
+                'Ciego de Avila' => 'Ciego de Avila',
+                'Camaguey' => 'Camaguey',
+                'Las Tunas' => 'Las Tunas',
+                'Holguín' => 'Holguín',
+                'Granma' => 'Granma',
+                'Santiago de Cuba' => 'Santiago de Cuba',
+                'Guantánamo' => 'Guantánamo',
+            ]))
+            ->add('destino', ChoiceType::class, array('choices' => 
                 [
                     'Pinar del Río' => 'Pinar del Río', 
                     'Artemisa' => 'Artemisa',
@@ -60,9 +60,9 @@ class ReservacionType extends AbstractType
                 ]
             ])
             ->add('tipo', ChoiceType::class, array('choices' => ['Ida' => 'Ida', 'Regreso' => 'Regreso']))
-            ->add('save', SubmitType::class, array('label'=>'Adicionar'))
+            ->add('edit', SubmitType::class, array('label'=>'Editar'))
         ;
-    }         
+    }        
     
     public function configureOptions(OptionsResolver $resolver)
     {

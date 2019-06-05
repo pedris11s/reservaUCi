@@ -11,6 +11,7 @@ use AppBundle\Form\ReservacionType;
 
 use Symfony\Component\Security\Core\Security;
 use AppBundle\Entity\Usuario;
+use AppBundle\Form\EditReservacionType;
 
 /**
  * @Route("/reservaciones")
@@ -41,17 +42,14 @@ class GestionReservacionesController extends Controller
         if($user == NULL)
             return $this->redirectToRoute('login');   
 
-        $obj = new Reservacion();
-        $form = $this->createForm(ReservacionType::class, $obj);
+        $res = new Reservacion();
+        $form = $this->createForm(ReservacionType::class, $res);
 
         $form = $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
-            $obj = $form->getData();
-            $obj->setEstado('FALSE');
-            $obj->setFecha($obj->getFecha()->format('d-m-Y H:i'));
-
+            
             $em = $this->getDoctrine()->getManager();
-            $em->persist($obj);
+            $em->persist($res);
             $em->flush();
 
             return $this->redirectToRoute('listar_reservaciones');
@@ -62,7 +60,7 @@ class GestionReservacionesController extends Controller
     }
 
     /**
-     * @Route("/delete/{id}", name="del_reservacion")
+     * @Route("/{id}/delete", name="del_reservacion")
      */
     public function deleteReservacionAction(Request $request, $id=null, Security $security)
     {   
@@ -83,7 +81,7 @@ class GestionReservacionesController extends Controller
     }
 
     /**
-     * @Route("/reservar/{id}", name="reservar")
+     * @Route("/{id}/reservar", name="reservar")
      */
     public function reservarAction(Request $request, $id=null, Security $security)
     {   
@@ -103,6 +101,28 @@ class GestionReservacionesController extends Controller
             $em->flush();
         }
         return $this->redirectToRoute('listar_reservaciones');
+    }
+
+    /**
+     * @Route("/{id}/edit", name="edit_reservacion")
+     */
+    public function editReservacionAction(Request $request, $id=null, Security $security)
+    {   
+        $user = $security->getUser();
+        if($user == NULL)
+            return $this->redirectToRoute('login');   
+        
+        $em = $this->getDoctrine()->getManager();
+        $res = $em->getRepository(Reservacion::class)->find($id);
+        $form = $this->createForm(EditReservacionType::class, $res);
+
+        $form = $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+
+            $em->flush();
+            return $this->redirectToRoute('listar_reservaciones');
+        }
+        return $this->render('reservaciones/edit_reservacion.html.twig', array('form'=> $form->createView()));
         
     }
 }

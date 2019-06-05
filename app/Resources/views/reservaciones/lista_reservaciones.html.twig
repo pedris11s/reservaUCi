@@ -19,7 +19,7 @@
           <th><i class=""></i> Destino</th>
           <th><i class=""></i> Fecha</th>
           <th><i class=""></i> Tipo</th>
-          {% if 'USER' in app.user.roles %}
+          {% if 'ROLE_USER' in app.user.roles %}
             <th><i class=""></i> Estado</th>
           {% endif %}
           <th><i class="icon_cogs"></i> Actions</th>
@@ -32,7 +32,7 @@
             <th>  {{ obj.destino }} </th>  
             <th>  {{ obj.fecha|date }} </th>  
             <th>  {{ obj.tipo }} </th>  
-            {% if 'USER' in app.user.roles %}
+            {% if 'ROLE_USER' in app.user.roles %}
                 {% if app.user in obj.usuarios %}
                     <td> <span class="label label-success">Reservado</span> </td>
                 {% else %}
@@ -41,7 +41,7 @@
             {% endif %}
             <td>
                 <div class="btn-group">
-                    {% if 'USER' in app.user.roles %}
+                    {% if 'ROLE_USER' in app.user.roles %}
                         {% if app.user in obj.usuarios %}
                             <a class="btn btn-danger btn-xs" href="{{ path('reservar', {'id': obj.id }) }}" ><i class="icon_close"></i> Cancelar</a>
                         {% else %}
@@ -49,7 +49,7 @@
                         {% endif %}
                     {% endif %}
 
-                    {% if 'ADMIN' in app.user.roles %}
+                    {% if 'ROLE_ADMIN' in app.user.roles %}
                         <a class="btn btn-info btn-xs" href="{{ path('edit_reservacion', {'id': obj.id }) }}"  ><i class="icon_pencil"></i> Editar</a>
                         <a class="btn btn-danger btn-xs" href="{{ path('del_reservacion', {'id': obj.id }) }}" ><i class="fa fa-trash-o"></i> Eliminar</a>
                     {% endif %}

@@ -53,7 +53,7 @@ class GestionUsuarioController extends Controller
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
 
-            $user->setRoles(array('USER'));
+            $user->setRoles(array('ROLE_USER'));
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
@@ -102,10 +102,7 @@ class GestionUsuarioController extends Controller
         $form = $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($usuario);
             $em->flush();
-
             return $this->redirectToRoute('listar_usuarios');
         }
         return $this->render('usuarios/edit_usuario.html.twig', array('form'=> $form->createView()));
