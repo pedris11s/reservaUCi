@@ -18,7 +18,7 @@
 
     {% block cuerpo %} 
       
-      {% if 'ROLE_ADMIN' in app.user.roles %}
+      {% if 'ADMIN' in app.user.roles %}
         <div class="container">
           <div class="row">
             <a class="btn btn-primary" href='{% block url_add %} {% endblock %}'><i class="icon_plus"></i> Adicionar</a>
